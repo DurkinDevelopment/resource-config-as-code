@@ -1,0 +1,3 @@
+config:
+  resource-config-as-code:datadog_api_key: 4215ce56fee1fa6a0fa7678c22a05fa7
+  resource-config-as-code:datadog_app_key: 886745d5e7409c1b249387f38a5e712fbbff5630

@@ -1,0 +1,6 @@
+name: resource-config-as-code
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A project for maintaining datadog resources
