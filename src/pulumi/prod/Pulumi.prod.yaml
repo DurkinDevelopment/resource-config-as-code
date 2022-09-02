@@ -1,7 +1,0 @@
-name: resource-config-as-code
-runtime:
-  name: python
-  options:
-    virtualenv: venv
-description: A project for managing the different observability resource configurations
-  as code
