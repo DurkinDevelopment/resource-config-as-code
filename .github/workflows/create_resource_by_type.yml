@@ -52,10 +52,11 @@ jobs:
         with:
           branch: '${{ env.BRANCH_NAME }}'
           sha: '${{ github.event.pull_request.head.sha }}'
-      - name: Generate & write new function to file
+      - name: Checkout repo
         uses: rohmanngmbh/action-checkout-repo@v1.3.2
         with:
           ref: ${{ env.BRANCH_NAME }}
+      - name: Generate & write new function to file
         working-directory: src/scripts
         run: python ${{ env.SCRIPTS_DIR }}/${{ env.SCRIPT_NAME }} ${{ env.ENVIRONMENT }} ${{ env.RESOURCE_TYPE }} ${{ env.JSON_INPUT }}
       - name: Commit the code changes
