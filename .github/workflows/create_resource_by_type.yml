@@ -1,6 +1,3 @@
-# Add in git workflow (commit, push, & PR)
-# Add in python scripts (create_and_write_function)
-# Add in input parameters (resource type - options, env - options, & json_input - string)
 name: Create Resource By Type
 
 on:
