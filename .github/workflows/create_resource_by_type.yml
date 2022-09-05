@@ -53,8 +53,8 @@ jobs:
           branch: '${{ env.BRANCH_NAME }}'
           sha: '${{ github.event.pull_request.head.sha }}'
       - name: Generate & write new function to file
+        working-directory: src/scripts
         run: python ${{ env.SCRIPTS_DIR }}/${{ env.SCRIPT_NAME }} ${{ env.ENVIRONMENT }} ${{ env.RESOURCE_TYPE }} ${{ env.JSON_INPUT }}
-        working-dir: src/scripts
       - name: Commit the code changes
         run: |
           # Stage the file, commit and push
