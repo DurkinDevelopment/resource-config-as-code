@@ -57,7 +57,7 @@ jobs:
         with:
           ref: ${{ env.BRANCH_NAME }}
       - name: Generate & write new function to file
-        working-directory: src/scripts
+        # working-directory: src/scripts
         run: python ${{ env.SCRIPTS_DIR }}/${{ env.SCRIPT_NAME }} ${{ env.ENVIRONMENT }} ${{ env.RESOURCE_TYPE }} ${{ env.JSON_INPUT }}
       - name: Commit the code changes
         run: |
