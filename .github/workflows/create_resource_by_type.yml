@@ -1,0 +1,70 @@
+name: Create Resource By Type
+
+on:
+  workflow_dispatch:
+    inputs:
+      resourceType:
+        type: choice
+        description: Available esource types
+        required: true
+        default: 'monitors'
+        options:
+          - monitors
+          - slos
+          - dashboards
+      environmentVar:
+        type: choice
+        description: Environment to add resource to
+        required: true
+        default: 'dev'
+        options:
+          - dev
+          - prod
+      jsonInput:
+        description: Exported monitor json
+        required: true
+        type: string
+        default: 'test'
+
+env:
+  SCRIPTS_DIR: src/scripts
+  SCRIPT_NAME: create_and_write_function.py
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  BRANCH_NAME: new-resource-by-type-${{ github.run_id }}-${{ github.run_attempt }}
+  ENVIRONMENT: ${{ github.event.inputs.environmentVar }}
+  RESOURCE_TYPE: ${{ github.event.inputs.resourceType }}
+  JSON_INPUT: ${{ github.event.inputs.jsonInput }}
+
+jobs:
+  CreateResourceByType:
+    name: Create Resource By Type
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup git config
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: Create a new branch
+        uses: peterjgrainger/action-create-branch@v2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: '${{ env.BRANCH_NAME }}'
+          sha: '${{ github.event.pull_request.head.sha }}'
+      - name: Generate & write new function to file
+        run: python ${{ env.SCRIPTS_DIR }}/${{ env.SCRIPT_NAME }} ${{ env.ENVIRONMENT }} ${{ env.RESOURCE_TYPE }} ${{ env.JSON_INPUT }}
+        working-dir: src/scripts
+      - name: Commit the code changes
+        run: |
+          # Stage the file, commit and push
+          git add .
+          git commit -m "feat: Add a new resource template by type"
+          git push origin main
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "feat: Add a new resource template by type"
+          title: "feat: Add a new resource template by type"
+          body: Create a new resource template by type
+          branch: ${{ env.BRANCH_NAME }}
