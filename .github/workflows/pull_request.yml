@@ -1,6 +1,7 @@
-name: Pulumi
+name: On Push & PR
 on:
   - pull_request
+  - push
 jobs:
   preview:
     name: Preview
@@ -11,7 +12,7 @@ jobs:
         with:
           python-version: 3.9
       - run: pip install -r requirements.txt
-      - working-directory: src/pulumi/dev
+        working-directory: src/pulumi/dev
       - uses: pulumi/actions@v3
         with:
           command: preview
