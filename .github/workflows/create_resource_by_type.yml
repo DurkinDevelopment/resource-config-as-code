@@ -40,11 +40,11 @@ jobs:
     name: Create Resource By Type
     runs-on: ubuntu-latest
     steps:
-      - name: Setup git config
-        run: |
-          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+      # - name: Setup git config
+      #   run: |
+      #     # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+      #     git config user.name "GitHub Actions Bot"
+      #     git config user.email "<>"
       - name: Create a new branch
         uses: peterjgrainger/action-create-branch@v2.2.0
         env:
