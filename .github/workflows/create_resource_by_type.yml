@@ -52,7 +52,6 @@ jobs:
 
       - name: Create a new branch
         uses: peterjgrainger/action-create-branch@v2.2.0
-        # Is this necessary if I have the environment variable up top
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
