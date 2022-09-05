@@ -29,7 +29,7 @@ on:
 env:
   SCRIPTS_DIR: src/scripts
   SCRIPT_NAME: create_and_write_function.py
-  # sGITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   BRANCH_NAME: new-resource-by-type-${{ github.run_id }}-${{ github.run_attempt }}
   ENVIRONMENT: ${{ github.event.inputs.environmentVar }}
   RESOURCE_TYPE: ${{ github.event.inputs.resourceType }}
@@ -54,6 +54,7 @@ jobs:
       - name: Create pull request
         uses: devops-infra/action-pull-request@master
         with:
+          target_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
           body: "**Automated pull request**<br><br>Create resource template by type"
           title: ${{ github.event.commits[0].message }}
