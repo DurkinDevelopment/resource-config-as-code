@@ -20,7 +20,7 @@ def generate_path_of_file_to_write_to(env, resource_type):
     ## code for writing to a new file
     # path_to_file = "../pulumi/%s/resources/custom/%s/%s" % (env, resource_type)
     ## code for writing to the main file
-    path_to_file = "../pulumi/%s/__main__.py" % env
+    path_to_file = "/home/runner/work/resource-config-as-code/resource-config-as-code/src/pulumi/%s/__main__.py" % env
     return path_to_file
 
 def write_to_file(path_to_file, content):
