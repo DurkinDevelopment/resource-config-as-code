@@ -1,4 +1,4 @@
-name: Pulumi
+name: Pulumi Up
 on:
   push:
     branches:
@@ -13,7 +13,7 @@ jobs:
         with:
           python-version: 3.9
       - run: pip install -r requirements.txt
-      - working-directory: src/pulumi/dev
+        working-directory: src/pulumi/dev
       - uses: pulumi/actions@v3
         with:
           command: up
