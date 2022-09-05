@@ -17,6 +17,9 @@ import pulumi_datadog as datadog
 #         type: Optional[str] = None
 #     }
 
+# class MonitorClass:
+#     def __init__(self):
+
 @overload
 def Monitor(resource_name: str,
             opts: Optional[ResourceOptions] = None,
