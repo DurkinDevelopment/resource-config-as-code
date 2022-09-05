@@ -29,7 +29,7 @@ on:
 env:
   SCRIPTS_DIR: src/scripts
   SCRIPT_NAME: create_and_write_function.py
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # sGITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   BRANCH_NAME: new-resource-by-type-${{ github.run_id }}-${{ github.run_attempt }}
   ENVIRONMENT: ${{ github.event.inputs.environmentVar }}
   RESOURCE_TYPE: ${{ github.event.inputs.resourceType }}
@@ -40,35 +40,53 @@ jobs:
     name: Create Resource By Type
     runs-on: ubuntu-latest
     steps:
-      - name: Create a new branch
-        uses: peterjgrainger/action-create-branch@v2.2.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          branch: '${{ env.BRANCH_NAME }}'
-          sha: '${{ github.event.pull_request.head.sha }}'
-      - name: Checkout repo
-        uses: rohmanngmbh/action-checkout-repo@v1.3.2
-        with:
-          ref: ${{ env.BRANCH_NAME }}
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Generate & write new function to file
-        # working-directory: src/scripts
         run: python ${{ env.SCRIPTS_DIR }}/${{ env.SCRIPT_NAME }} ${{ env.ENVIRONMENT }} ${{ env.RESOURCE_TYPE }} ${{ env.JSON_INPUT }}
-      - name: Setup git config
-        run: |
-          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-      - name: Commit the code changes
-        run: |
-          # Stage the file, commit and push
-          git add .
-          git commit -m "feat: Add a new resource template by type"
-          git push origin main
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
         with:
-          commit-message: "feat: Add a new resource template by type"
-          title: "feat: Add a new resource template by type"
-          body: Create a new resource template by type
-          branch: ${{ env.BRANCH_NAME }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_prefix: "feat: "
+          commit_message: "Create a new resource template by type"
+          target_branch: ${{ env.BRANCH_NAME }}
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          body: "**Automated pull request**<br><br>Create resource template by type"
+          title: ${{ github.event.commits[0].message }}
+    # steps:
+    #   - name: Create a new branch
+    #     uses: peterjgrainger/action-create-branch@v2.2.0
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     with:
+    #       branch: '${{ env.BRANCH_NAME }}'
+    #       sha: '${{ github.event.pull_request.head.sha }}'
+    #   - name: Checkout repo
+    #     uses: rohmanngmbh/action-checkout-repo@v1.3.2
+    #     with:
+    #       ref: ${{ env.BRANCH_NAME }}
+    #   - name: Generate & write new function to file
+    #     # working-directory: src/scripts
+    #     run: python ${{ env.SCRIPTS_DIR }}/${{ env.SCRIPT_NAME }} ${{ env.ENVIRONMENT }} ${{ env.RESOURCE_TYPE }} ${{ env.JSON_INPUT }}
+    #   - name: Setup git config
+    #     run: |
+    #       # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+    #       git config user.name "GitHub Actions Bot"
+    #       git config user.email "<>"
+    #   - name: Commit the code changes
+    #     run: |
+    #       # Stage the file, commit and push
+    #       git add .
+    #       git commit -m "feat: Add a new resource template by type"
+    #       git push origin main
+    #   - name: Create pull request
+    #     uses: peter-evans/create-pull-request@v4
+    #     with:
+    #       commit-message: "feat: Add a new resource template by type"
+    #       title: "feat: Add a new resource template by type"
+    #       body: Create a new resource template by type
+    #       branch: ${{ env.BRANCH_NAME }}
