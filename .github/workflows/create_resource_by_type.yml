@@ -42,6 +42,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Generate & write new function to file
         run: python ${{ env.SCRIPTS_DIR }}/${{ env.SCRIPT_NAME }} ${{ env.ENVIRONMENT }} ${{ env.RESOURCE_TYPE }} ${{ env.JSON_INPUT }}
       - name: Commit and push changes
