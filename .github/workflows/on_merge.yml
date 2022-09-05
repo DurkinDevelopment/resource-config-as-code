@@ -1,4 +1,4 @@
-name: Pulumi Up
+name: On Merge
 on:
   push:
     branches:
