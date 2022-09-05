@@ -54,6 +54,7 @@ jobs:
       - name: Create pull request
         uses: devops-infra/action-pull-request@master
         with:
+          source_branch: ${{ env.BRANCH_NAME }}
           target_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
           body: "**Automated pull request**<br><br>Create resource template by type"
