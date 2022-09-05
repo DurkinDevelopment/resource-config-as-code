@@ -16,6 +16,7 @@ jobs:
         with:
           command: preview
           stack-name: dev
+          comment-on-pr: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           work-dir: src/pulumi/dev
         env:
