@@ -4,7 +4,6 @@ import json
 import pulumi
 import pulumi_datadog as datadog
 
-
 foo = datadog.Monitor("foo",
     escalation_message="Escalation message @pagerduty",
     include_tags=True,
@@ -20,4 +19,3 @@ foo = datadog.Monitor("foo",
         "team:fooBar",
     ],
     type="metric alert")
-
