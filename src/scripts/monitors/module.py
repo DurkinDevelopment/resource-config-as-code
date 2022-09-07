@@ -8,7 +8,7 @@ class Monitor:
         definition = "%s = %s" % (name, template)
         return definition
     def create_template(self, name = "Example monitor - service check"):
-        return template.MONITOR % (name)
+        return template.MONITOR % name
     def create_name(self, length):
         prefix = randomword(length)
         return "monitor_json_%s" % prefix
