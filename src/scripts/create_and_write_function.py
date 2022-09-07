@@ -3,7 +3,7 @@ from monitors.module import Monitor
 from utils.helper_methods import write_to_file
 
 def main(env, resource_type, json_input):
-    Monitor().create_definition()
+    content = Monitor().create_definition()
     write_to_file(env, resource_type, content)
 
 if __name__ == "__main__":
