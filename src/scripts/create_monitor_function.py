@@ -31,7 +31,7 @@ monitor_definition = """{
         "classification": "custom"
     }"""
 
-monitor_json_template = """datadog.MonitorJson(\"monitorJson\", monitor=\"\"\"%s\"\"\)""""
+monitor_json_template = """datadog.MonitorJson(\"monitorJson\", monitor=\"\"\"%s\"\"\)"""
 
 def generate_monitor_json():
     prefix = randomword(5)
