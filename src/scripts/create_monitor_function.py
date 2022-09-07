@@ -7,14 +7,40 @@ def randomword(length):
    letters = string.ascii_lowercase
    return ''.join(random.choice(letters) for i in range(length))
 
-monitor_definition = """{
-    "name": "%s",
+# monitor_definition = """{
+#     "name": "%s",
+#     "type": "service check",
+#     "query": "\\"ntp.in_sync\\".by(\\"*\\").last(2).count_by_status()",
+#     "message": "Change the message triggers if any host's clock goes out of sync with the time given by NTP. The offset threshold is configured in the Agent's 'ntp.yaml' file.\\n\\nSee [Troubleshooting NTP Offset issues](https://docs.datadoghq.com/agent/troubleshooting/ntp for more details on cause and resolution.",
+#     "tags": [],
+#     "multi": true,
+#     "restricted_roles": null,
+#     "options": {
+#         "include_tags": true,
+#         "locked": false,
+#         "new_host_delay": 150,
+#         "notify_audit": false,
+#         "notify_no_data": false,
+#         "thresholds": {
+#             "warning": 1,
+#             "ok": 1,
+#             "critical": 1
+#         }
+#     },
+#     "priority": null,
+#     "classification": "custom"
+# }"""
+
+# monitor_json_template = """datadog.MonitorJson("monitorJson", monitor=\"\"\"%s\"\"\"\n)"""
+
+monitor_json_template = """datadog.MonitorJson("monitorJson", monitor=\"\"\"{
+    "name": "Example monitor - service check",
     "type": "service check",
-    "query": "\\"ntp.in_sync\\".by(\\"*\\").last(2).count_by_status()",
-    "message": "Change the message triggers if any host's clock goes out of sync with the time given by NTP. The offset threshold is configured in the Agent's 'ntp.yaml' file.\\n\\nSee [Troubleshooting NTP Offset issues](https://docs.datadoghq.com/agent/troubleshooting/ntp for more details on cause and resolution.",
+    "query": "\"ntp.in_sync\".by(\"*\").last(2).count_by_status()",
+    "message": "Change the message triggers if any host's clock goes out of sync with the time given by NTP. The offset threshold is configured in the Agent's 'ntp.yaml' file.\n\nSee [Troubleshooting NTP Offset issues](https://docs.datadoghq.com/agent/troubleshooting/ntp for more details on cause and resolution.",
     "tags": [],
     "multi": true,
-    "restricted_roles": null,
+	"restricted_roles": null,
     "options": {
         "include_tags": true,
         "locked": false,
@@ -29,19 +55,19 @@ monitor_definition = """{
     },
     "priority": null,
     "classification": "custom"
-}"""
+}
+""")
 
-monitor_json_template = """datadog.MonitorJson("monitorJson", monitor=\"\"\"%s\"\"\"\n)"""
 
 def generate_monitor_json():
     prefix = randomword(5)
     # Generate the unique monitor name
     monitor_name = "monitor_json_%s" % prefix
     # Plug the monitor name into the monitor definition
-    updated_monitor_definition = monitor_definition % monitor_name
+    # updated_monitor_definition = monitor_definition % monitor_name
     # Plug the monitor definition into the monitor function template
-    updated_monitor_json = monitor_json_template % updated_monitor_definition
-    generated_monitor_json = "%s = %s" % (monitor_name, updated_monitor_json)
+    # updated_monitor_json = monitor_json_template % updated_monitor_definition
+    generated_monitor_json = "%s = %s" % (monitor_name, monitor_json_template)
     return generated_monitor_json
 
 def main(json_input):
