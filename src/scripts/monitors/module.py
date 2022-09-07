@@ -1,4 +1,4 @@
-from ../utils.helper_methods import randomword
+from ..utils.helper_methods import randomword
 import template
 
 class Monitor:

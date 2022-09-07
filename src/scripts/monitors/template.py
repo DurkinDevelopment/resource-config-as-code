@@ -22,3 +22,7 @@ MONITOR = """datadog.MonitorJson("monitorJson", monitor=\"\"\"{
     "classification": "custom"
 }
 \"\"\")"""
+
+JSON_FRAMEWORK = """datadog.MonitorJson("monitorJson", monitor=\"\"\"
+%s
+\"\"\")"""
