@@ -5,7 +5,7 @@ on:
     inputs:
       resourceType:
         type: choice
-        description: Available esource types
+        description: Available resource types
         required: true
         default: 'monitors'
         options:
