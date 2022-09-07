@@ -1,6 +1,6 @@
 import sys
-import Monitor from monitors.module
-import write_to_file from utils.helper_methods
+from monitors.module import Monitor
+from utils.helper_methods import write_to_file
 
 def main(env, resource_type, json_input):
     Monitor.create_definition()
