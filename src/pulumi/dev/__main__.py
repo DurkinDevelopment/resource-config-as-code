@@ -25,7 +25,7 @@ foo = datadog.Monitor("foo",
 monitor_json_hknvg = datadog.MonitorJson("monitorJson", monitor="""{
     "name": "monitor_json_hknvg",
     "type": "service check",
-    "query": "\\\"ntp.in_sync\\\".by(\\\"*\\\").last(2).count_by_status()",
+    "query": "\\"ntp.in_sync\\".by(\\"*\\").last(2).count_by_status()",
     "message": "Change the message triggers if any host's clock goes out of sync with the time given by NTP. The offset threshold is configured in the Agent's 'ntp.yaml' file.\\n\\nSee [Troubleshooting NTP Offset issues](https://docs.datadoghq.com/agent/troubleshooting/ntp for more details on cause and resolution.",
     "tags": [],
     "multi": true,
