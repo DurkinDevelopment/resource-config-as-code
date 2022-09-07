@@ -1,4 +1,4 @@
-from ...utils.helper_methods import randomword
+from utils import helper_methods
 import template
 
 class Monitor:
@@ -10,6 +10,6 @@ class Monitor:
     def create_template(self, name = "Example monitor - service check"):
         return template.MONITOR % name
     def create_name(self, length):
-        prefix = randomword(length)
+        prefix = helper_methods.randomword(length)
         return "monitor_json_%s" % prefix
 
