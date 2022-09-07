@@ -1,7 +1,7 @@
 import sys
 import random
 import string
-from monitors/module import Monitor
+from monitors.module import Monitor
 
 def generate_monitor_json():
     return Monitor().create_definition()
