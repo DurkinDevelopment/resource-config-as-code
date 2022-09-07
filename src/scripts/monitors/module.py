@@ -1,5 +1,5 @@
 from utils import helper_methods
-import template
+from monitors import template
 
 class Monitor:
     def create_definition(self):
