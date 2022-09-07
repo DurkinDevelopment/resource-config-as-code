@@ -3,8 +3,8 @@ from monitors import template
 
 class Monitor:
     def create_definition(self):
-        name = create_name(5)
-        template = create_template(name)
+        name = self.create_name(5)
+        template = self.create_template(name)
         definition = "%s = %s" % (name, template)
         return definition
     def create_template(self, name = "Example monitor - service check"):
