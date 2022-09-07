@@ -19,6 +19,3 @@ foo = datadog.Monitor("foo",
         "team:fooBar",
     ],
     type="metric alert")
-
-
-
