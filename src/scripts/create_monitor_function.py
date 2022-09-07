@@ -56,7 +56,7 @@ monitor_json_template = """datadog.MonitorJson("monitorJson", monitor=\"\"\"{
     "priority": null,
     "classification": "custom"
 }
-""")
+\"\"\")"""
 
 
 def generate_monitor_json():
