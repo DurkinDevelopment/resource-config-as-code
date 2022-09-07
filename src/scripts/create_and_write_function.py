@@ -1,10 +1,10 @@
 import sys
-import create_monitor_function
-import write_to_file
+import Monitor from monitors.module
+import write_to_file from utils.helper_methods
 
 def main(env, resource_type, json_input):
-    content = create_monitor_function.main(json_input)
-    write_to_file.main(env, resource_type, content)
+    Monitor.create_definition()
+    write_to_file(env, resource_type, content)
 
 if __name__ == "__main__":
     env = sys.argv[1]
